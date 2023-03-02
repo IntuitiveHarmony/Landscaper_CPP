@@ -88,7 +88,12 @@ class Landscaper {
             std::cout << "Please make a selection.\n" << std::endl;
             std::cin >> choice;
             if(choice == "1" || choice == "2" || choice == "3") {
-                BuyTool(store.at(stoi(choice) - 1));
+                Tool newTool = store.at(stoi(choice) - 1);
+                if(funds >= store.at(stoi(choice) - 1).cost) {
+                    // std::cout << newTool.cost; 
+                    BuyTool(store.at(stoi(choice) - 1));
+                }
+                
                 // store.erase(store.begin());
             } else if (choice == "e" || choice == "E") { 
                 
@@ -98,31 +103,6 @@ class Landscaper {
         }
     
     
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        // Allow player to choose to go to work, shop for tools or quit game.
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        void DailyChoice() {
-            std::string choice;
-            std::cout << "\nGood morning " << name << "! You have $" << funds << std::endl;
-            std::cout << "You are using your " << currentTool.name << " for a profit of $" << currentTool.profit << std::endl;
-            std::cout << "\nWhat would you like to do?\nPlease type a number and press enter:\n\t1. Go to work\n\t2. Go to the store\n\tQ. EXIT GAME\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-            
-            // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            // Daily choice input from user
-            // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            std::cin >> choice;
-            if(choice == "1") {
-                GoToWork();
-            } else if(choice == "2") {
-                
-            } else if(choice == "q" || choice == "Q") {
-                std::cout << "\nThank you for playing Landscaper, " << name << "!\n";
-                std::cout<< "Here are your final stats:\n\tFunds: $" << funds << "\n\tTool in use: " << currentTool.name << std::endl;  
-                exit = true;
-            } else {
-                std::cout << std::endl << choice << " is not a valid option\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
-            }
-        }
     // ~~~~~~~~~~~~~~~~~
     // Player Attributes
     // ~~~~~~~~~~~~~~~~~
@@ -165,8 +145,31 @@ int main() {
     // Set conditions to win game
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
     while((player.funds <= 500 || player.currentTool.name != "Riding Lawn Mower") && !player.exit) {
-        player.DailyChoice();
-        player.GoToStore(store);
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Daily Choice Allow player to choose to go to work, shop for tools or quit game.
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        std::string dailyChoice;
+        std::cout << "\nGood morning " << player.name << "! You have $" << player.funds << std::endl;
+        std::cout << "You are using your " << player.currentTool.name << " for a profit of $" << player.currentTool.profit << std::endl;
+        std::cout << "\nWhat would you like to do?\nPlease type a number and press enter:\n\t1. Go to work\n\t2. Go to the store\n\tQ. EXIT GAME\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Daily choice input from user
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        std::cin >> dailyChoice;
+        if(dailyChoice == "1") {
+            player.GoToWork();
+        } else if(dailyChoice == "2") {
+            player.GoToStore(store);
+        } else if(dailyChoice == "q" || dailyChoice == "Q") {
+            std::cout << "\nThank you for playing Landscaper, " << player.name << "!\n";
+            std::cout<< "Here are your final stats:\n\tFunds: $" << player.funds << "\n\tTool in use: " << player.currentTool.name << std::endl;  
+            player.exit = true;
+        } else {
+            std::cout << std::endl << dailyChoice << " is not a valid option\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+        }
+        // player.DailyChoice();
+        
     }
 
     
