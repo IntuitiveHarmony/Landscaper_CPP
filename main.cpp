@@ -61,13 +61,18 @@ class Landscaper {
                 toolBox.push_back(newTool);
                 funds -= newTool.cost;
                 currentTool = newTool;
+                // for(int i = 0; i < store.size(); i++) {
+                //     if(currentTool.name == store.at(i)) {
+                //         store.erase(store.begin() + store.at(i))
+                //     }
+                // }
             } else {
                 std::cout << "You are short $" << newTool.cost - funds << std::endl;
             }
         }
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        // Prints Store to the console and gives user ability to purchsace tools
+        // Prints Store to the console and gives user ability to purchase tools
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void GoToStore(std::vector<Tool> store) {
             std::cout << "\nWelcome to the store!\n\nWhat would you like to purchase?\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << std::endl;
@@ -84,7 +89,7 @@ class Landscaper {
             std::cin >> choice;
             if(choice == "1" || choice == "2" || choice == "3") {
                 BuyTool(store.at(stoi(choice) - 1));
-                store.erase(store.begin());
+                // store.erase(store.begin());
             } else if (choice == "e" || choice == "E") { 
                 
             } else {
@@ -96,7 +101,7 @@ class Landscaper {
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Allow player to choose to go to work, shop for tools or quit game.
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        void DailyChoice(std::vector<Tool> store) {
+        void DailyChoice() {
             std::string choice;
             std::cout << "\nGood morning " << name << "! You have $" << funds << std::endl;
             std::cout << "You are using your " << currentTool.name << " for a profit of $" << currentTool.profit << std::endl;
@@ -109,7 +114,7 @@ class Landscaper {
             if(choice == "1") {
                 GoToWork();
             } else if(choice == "2") {
-                GoToStore(store);
+                
             } else if(choice == "q" || choice == "Q") {
                 std::cout << "\nThank you for playing Landscaper, " << name << "!\n";
                 std::cout<< "Here are your final stats:\n\tFunds: $" << funds << "\n\tTool in use: " << currentTool.name << std::endl;  
@@ -155,11 +160,13 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     player.ChangeName();
 
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set conditions to win game
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
     while((player.funds <= 500 || player.currentTool.name != "Riding Lawn Mower") && !player.exit) {
-        player.DailyChoice(store);
+        player.DailyChoice();
+        player.GoToStore(store);
     }
 
     
