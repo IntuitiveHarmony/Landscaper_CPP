@@ -40,7 +40,7 @@ class Landscaper {
         // Get Input from the user for their name
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void ChangeName() {
-            std::cout << "Welcome to Landscapper!\n";
+            std::cout << "Welcome to Landscaper!\n";
             std::cout << "What is your name? ";
             std::cin >> name;
             std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -134,7 +134,7 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~
     // Instansiate each tool
     // ~~~~~~~~~~~~~~~~~~~~~
-    Tool teeth("Teeth", 0, 1);
+    Tool hands("Bare Hands", 0, 1);
     Tool scissors("Scissors", 5, 5);
     Tool lawnMower("Lawn Mower", 25, 25);
     Tool ridingLawnMower("Riding Lawn Mower", 150, 50);
@@ -148,7 +148,7 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~~
     // Instansiate the player
     // ~~~~~~~~~~~~~~~~~~~~~~
-    Landscaper player("Name", 0, {}, teeth, false); 
+    Landscaper player("Name", 0, {}, hands, false); 
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Ask player name to start the game
