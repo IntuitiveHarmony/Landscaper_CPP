@@ -158,7 +158,7 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set conditions to win game
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    while((player.funds <= 500 && player.currentTool.name != "Riding Lawn Mower") && !player.exit) {
+    while((player.funds <= 500 || player.currentTool.name != "Riding Lawn Mower") && !player.exit) {
         player.DailyChoice(store);
     }
 
