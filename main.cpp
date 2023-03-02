@@ -78,11 +78,15 @@ class Landscaper {
             // Store choice input from user
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             std::string choice;
-            std::cout << "What would you like to purchase?\n" << std::endl;
+
+            std::cout << "E. EXIT STORE\n\n";
+            std::cout << "Please make a selection.\n" << std::endl;
             std::cin >> choice;
             if(choice == "1" || choice == "2" || choice == "3") {
                 BuyTool(store.at(stoi(choice) - 1));
                 store.erase(store.begin());
+            } else if (choice == "e" || choice == "E") { 
+                
             } else {
                 std::cout << std::endl << choice << " is not a valid option\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
             }
@@ -96,7 +100,7 @@ class Landscaper {
             std::string choice;
             std::cout << "\nGood morning " << name << "! You have $" << funds << std::endl;
             std::cout << "You are using your " << currentTool.name << " for a profit of $" << currentTool.profit << std::endl;
-            std::cout << "\nWhat would you like to do?\nPlease type a number and press enter:\n\t1. Go to work\n\t2. Go to the store\n\t3. EXIT GAME\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+            std::cout << "\nWhat would you like to do?\nPlease type a number and press enter:\n\t1. Go to work\n\t2. Go to the store\n\tQ. EXIT GAME\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
             
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             // Daily choice input from user
@@ -106,12 +110,10 @@ class Landscaper {
                 GoToWork();
             } else if(choice == "2") {
                 GoToStore(store);
-            } else if(choice == "3") {
+            } else if(choice == "q" || choice == "Q") {
                 std::cout << "\nThank you for playing Landscaper, " << name << "!\n";
                 std::cout<< "Here are your final stats:\n\tFunds: $" << funds << "\n\tTool in use: " << currentTool.name << std::endl;  
                 exit = true;
-            } else if(choice == "4") { 
-                
             } else {
                 std::cout << std::endl << choice << " is not a valid option\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
             }
@@ -156,7 +158,7 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set conditions to win game
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    while(player.funds <= 500 || player.currentTool.name != "Riding Lawn Mower" && !player.exit) {
+    while(!player.exit && player.funds <= 500 || player.currentTool.name != "Riding Lawn Mower") {
         player.DailyChoice(store);
     }
 
