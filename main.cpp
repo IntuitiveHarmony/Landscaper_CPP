@@ -8,24 +8,35 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class Tool {
     public:
-        Tool(std::string n, int c, int p) {
-            name = n;
-            cost = c;
-            profit = p;
-        }
-    // private:
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Construct and initialize Tool
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        Tool(std::string n, int c, int p) : 
+            name(n),
+            cost(c),
+            profit(p)
+            {}
+        // private:
         std::string name;
         int cost;
         int profit;
 };
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Store class to house the tools
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class Store {
     public:
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Construct and initialize Store
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         Store(std::vector<Tool> t) : 
             shelf(t)
             {}
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Remove tool from shelf upon purchase
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void SellTool(int index) {
-            std::cout << "sell" << index << std::endl;
             shelf.erase(shelf.begin() + index);
         }
         std::vector<Tool> shelf;
@@ -48,11 +59,11 @@ class Landscaper {
             {}
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        // Get Input from the user for their name
+        // Describe the game and get Input from the user for their name
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void ChangeName() {
             std::cout << "Welcome to Landscaper!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-            std::cout << "Go to work in order to gain funds. Upgrade tools to maximize profit.\nThe game is won when the player acquires the higest upgrade to their tool box and $500 funds\n\n";
+            std::cout << "\tGo to work in order to gain funds. \n\tUpgrade tools to maximize profit.\n\tThe game is won when the player acquires the higest upgrade to their tool box and $500 funds\n\n";
             std::cout << "What is your name? ";
             std::cin >> name;
             std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -73,11 +84,6 @@ class Landscaper {
                 toolBox.push_back(newTool);
                 funds -= newTool.cost;
                 currentTool = newTool;
-                // for(int i = 0; i < store.size(); i++) {
-                //     if(currentTool.name == store.at(i)) {
-                //         store.erase(store.begin() + store.at(i))
-                //     }
-                // }
             } 
         }
 
@@ -87,24 +93,23 @@ class Landscaper {
         void GoToStore(Store* store) {
             std::cout << "\nWelcome to the store!\n\nWhat would you like to purchase?\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << std::endl;
             for(int i = 0; i < store->shelf.size(); i++) {
-                std::cout << i + 1 << ". " << store->shelf[i].name << " Cost: $" << store->shelf[i].cost << " Profit: $" << store->shelf[i].profit << std::endl;
+                std::cout << i + 1 << ". " << store->shelf[i].name << " -- Cost: $" << store->shelf[i].cost << " Profit: $" << store->shelf[i].profit << std::endl;
             }
+            std::cout << "E. EXIT STORE\n\n";
+            std::cout << "Please make a selection.\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << std::endl;
+            
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             // Store choice input from user
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             std::string choice;
-
-            std::cout << "E. EXIT STORE\n\n";
-            std::cout << "Please make a selection.\n" << std::endl;
             std::cin >> choice;
             if(choice == "1" || choice == "2" || choice == "3") {
                 Tool newTool = store->shelf.at(stoi(choice) - 1);
                 if(funds >= store->shelf.at(stoi(choice) - 1).cost) {
-                    // std::cout << newTool.cost; 
                     BuyTool(store->shelf.at(stoi(choice) - 1));
                     store->SellTool((stoi(choice) - 1));
                 } else {
-                std::cout << "You are short $" << newTool.cost - funds << std::endl;
+                    std::cout << "\nYou are short $" << newTool.cost - funds << " for the " << newTool.name << std::endl;
             }
                 
                 // store.erase(store.begin());
@@ -115,12 +120,14 @@ class Landscaper {
             }
         }
 
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Allow user to exit game from main menu
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void ExitGame() {
             std::cout << "\nThank you for playing Landscaper, " << name << "!\n";
             std::cout<< "Here are your final stats:\n\tFunds: $" << funds << "\n\tTool in use: " << currentTool.name << std::endl;  
             exit = true;
         }
-    
     
     // ~~~~~~~~~~~~~~~~~
     // Player Attributes
@@ -143,13 +150,11 @@ int main() {
     Tool lawnMower("Lawn Mower", 25, 25);
     Tool ridingLawnMower("Riding Lawn Mower", 150, 50);
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Store of tools for player to buy from
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Instansiate the store of tools for player to buy from
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Store store({scissors, lawnMower, ridingLawnMower});
     Store* storePtr = &store;
-    // std::vector<Tool> store = {scissors, lawnMower, ridingLawnMower};
-    
     
     // ~~~~~~~~~~~~~~~~~~~~~~
     // Instansiate the player
@@ -160,7 +165,6 @@ int main() {
     // Ask player name to start the game
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     player.ChangeName();
-
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set conditions to win game
@@ -189,6 +193,7 @@ int main() {
         }
         
     }
+    
     // ~~~~~~~~~~~~~~~~~~~~~~~~~
     // Winning message upon exit
     // ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -197,7 +202,6 @@ int main() {
     }
     
     player.ExitGame();
-    
     
     return 0;
 }
