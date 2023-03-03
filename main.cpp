@@ -8,7 +8,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class Tool {
     public:
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Construct and initialize Tool
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         Tool(std::string n, int c, int p) : 
@@ -22,9 +22,9 @@ class Tool {
         int profit;
 };
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Store class to house the tools
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class Store {
     public:
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -42,9 +42,9 @@ class Store {
         std::vector<Tool> shelf;
 };
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Landscaper class defines the player and many of it's member functions form the game itself
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Landscaper class defines the player and many of it's member functions form the game
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class Landscaper {
     public:
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,9 +58,9 @@ class Landscaper {
             exit(e)
             {}
 
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Describe the game and get Input from the user for their name
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void ChangeName() {
             std::cout << "Welcome to Landscaper!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
             std::cout << "\tGo to work in order to gain funds. \n\tUpgrade tools to maximize profit.\n\tThe game is won when the player acquires the higest upgrade to their tool box and $500 funds\n\n";
@@ -77,7 +77,9 @@ class Landscaper {
         }
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        // Buy tool from the store.  It checks the player's funds and will put the tool in the players toolbox if they have enough $$$.  If not it wil give them a message with the difference so they know how much to save.
+        // Buy tool from the store.  
+        // It checks the player's funds and will put the tool in the players toolbox if they have enough $$$.  
+        // If not it wil give them a message with the difference so they know how much to save.
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void BuyTool(Tool newTool) {
             if(funds >= newTool.cost) {
@@ -98,9 +100,9 @@ class Landscaper {
             std::cout << "E. EXIT STORE\n\n";
             std::cout << "Please make a selection.\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << std::endl;
             
-            // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            // Store choice input from user
-            // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            // Tool purchase input from user
+            // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             std::string choice;
             std::cin >> choice;
             if(choice == "1" || choice == "2" || choice == "3") {
@@ -110,11 +112,9 @@ class Landscaper {
                     store->SellTool((stoi(choice) - 1));
                 } else {
                     std::cout << "\nYou are short $" << newTool.cost - funds << " for the " << newTool.name << std::endl;
-            }
-                
-                // store.erase(store.begin());
+                }
             } else if (choice == "e" || choice == "E") { 
-                
+                // Exit store 
             } else {
                 std::cout << std::endl << choice << " is not a valid option\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
             }
@@ -150,9 +150,10 @@ int main() {
     Tool lawnMower("Lawn Mower", 25, 25);
     Tool ridingLawnMower("Riding Lawn Mower", 150, 50);
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Instansiate the store of tools for player to buy from
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Make pointer to the store to load into the GoToStore Function
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Store store({scissors, lawnMower, ridingLawnMower});
     Store* storePtr = &store;
     
