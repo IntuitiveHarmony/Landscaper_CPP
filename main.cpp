@@ -40,7 +40,8 @@ class Landscaper {
         // Get Input from the user for their name
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void ChangeName() {
-            std::cout << "Welcome to Landscaper!\n";
+            std::cout << "Welcome to Landscaper!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+            std::cout << "Go to work in order to gain funds. Upgrade tools to maximize profit.\nThe game is won when the player acquires the higest upgrade to their tool box and $500 funds\n\n";
             std::cout << "What is your name? ";
             std::cin >> name;
             std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -66,9 +67,7 @@ class Landscaper {
                 //         store.erase(store.begin() + store.at(i))
                 //     }
                 // }
-            } else {
-                std::cout << "You are short $" << newTool.cost - funds << std::endl;
-            }
+            } 
         }
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,7 +91,12 @@ class Landscaper {
                 if(funds >= store.at(stoi(choice) - 1).cost) {
                     // std::cout << newTool.cost; 
                     BuyTool(store.at(stoi(choice) - 1));
-                }
+                    store.erase((store.begin())
+                        // + stoi(choice) - 1
+                        );
+                } else {
+                std::cout << "You are short $" << newTool.cost - funds << std::endl;
+            }
                 
                 // store.erase(store.begin());
             } else if (choice == "e" || choice == "E") { 
@@ -100,6 +104,12 @@ class Landscaper {
             } else {
                 std::cout << std::endl << choice << " is not a valid option\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
             }
+        }
+
+        void ExitGame() {
+            std::cout << "\nThank you for playing Landscaper, " << name << "!\n";
+            std::cout<< "Here are your final stats:\n\tFunds: $" << funds << "\n\tTool in use: " << currentTool.name << std::endl;  
+            exit = true;
         }
     
     
@@ -162,16 +172,20 @@ int main() {
         } else if(dailyChoice == "2") {
             player.GoToStore(store);
         } else if(dailyChoice == "q" || dailyChoice == "Q") {
-            std::cout << "\nThank you for playing Landscaper, " << player.name << "!\n";
-            std::cout<< "Here are your final stats:\n\tFunds: $" << player.funds << "\n\tTool in use: " << player.currentTool.name << std::endl;  
-            player.exit = true;
+            player.ExitGame();
         } else {
             std::cout << std::endl << dailyChoice << " is not a valid option\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
         }
-        // player.DailyChoice();
         
     }
-
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Winning message upon exit
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~
+    if(player.funds >= 500) {
+        std::cout << "\nCongragulations, you have won!" << std::endl;
+    }
+    
+    player.ExitGame();
     
     
     return 0;
