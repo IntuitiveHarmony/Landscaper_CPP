@@ -24,7 +24,10 @@ class Store {
         Store(std::vector<Tool> t) : 
             shelf(t)
             {}
-
+        void SellTool(int index) {
+            std::cout << "sell" << index << std::endl;
+            shelf.erase(shelf.begin() + index);
+        }
         std::vector<Tool> shelf;
 };
 
@@ -81,10 +84,10 @@ class Landscaper {
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Prints Store to the console and gives user ability to purchase tools
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        void GoToStore(std::vector<Tool> store) {
+        void GoToStore(Store* store) {
             std::cout << "\nWelcome to the store!\n\nWhat would you like to purchase?\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << std::endl;
-            for(int i = 0; i < store.size(); i++) {
-                std::cout << i + 1 << ". " << store[i].name << " Cost: $" << store[i].cost << " Profit: $" << store[i].profit << std::endl;
+            for(int i = 0; i < store->shelf.size(); i++) {
+                std::cout << i + 1 << ". " << store->shelf[i].name << " Cost: $" << store->shelf[i].cost << " Profit: $" << store->shelf[i].profit << std::endl;
             }
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             // Store choice input from user
@@ -95,13 +98,11 @@ class Landscaper {
             std::cout << "Please make a selection.\n" << std::endl;
             std::cin >> choice;
             if(choice == "1" || choice == "2" || choice == "3") {
-                Tool newTool = store.at(stoi(choice) - 1);
-                if(funds >= store.at(stoi(choice) - 1).cost) {
+                Tool newTool = store->shelf.at(stoi(choice) - 1);
+                if(funds >= store->shelf.at(stoi(choice) - 1).cost) {
                     // std::cout << newTool.cost; 
-                    BuyTool(store.at(stoi(choice) - 1));
-                    store.erase((store.begin())
-                        // + stoi(choice) - 1
-                        );
+                    BuyTool(store->shelf.at(stoi(choice) - 1));
+                    store->SellTool((stoi(choice) - 1));
                 } else {
                 std::cout << "You are short $" << newTool.cost - funds << std::endl;
             }
@@ -146,6 +147,7 @@ int main() {
     // Store of tools for player to buy from
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Store store({scissors, lawnMower, ridingLawnMower});
+    Store* storePtr = &store;
     // std::vector<Tool> store = {scissors, lawnMower, ridingLawnMower};
     
     
@@ -179,7 +181,7 @@ int main() {
         if(dailyChoice == "1") {
             player.GoToWork();
         } else if(dailyChoice == "2") {
-            player.GoToStore(store.shelf);
+            player.GoToStore(storePtr);
         } else if(dailyChoice == "q" || dailyChoice == "Q") {
             player.ExitGame();
         } else {
