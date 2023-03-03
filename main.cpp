@@ -143,7 +143,7 @@ class Landscaper {
 
 int main() {
     // ~~~~~~~~~~~~~~~~~~~~~
-    // Instansiate each tool
+    // Instantiate each tool
     // ~~~~~~~~~~~~~~~~~~~~~
     Tool hands("Bare Hands", 0, 1);
     Tool scissors("Scissors", 5, 5);
@@ -151,14 +151,14 @@ int main() {
     Tool ridingLawnMower("Riding Lawn Mower", 150, 50);
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    // Instansiate the store of tools for player to buy from
+    // Instantiate the store of tools for player to buy from
     // Make pointer to the store to load into the GoToStore Function
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Store store({scissors, lawnMower, ridingLawnMower});
     Store* storePtr = &store;
     
     // ~~~~~~~~~~~~~~~~~~~~~~
-    // Instansiate the player
+    // Instantiate the player
     // ~~~~~~~~~~~~~~~~~~~~~~
     Landscaper player("Name", 0, {}, hands, false); 
 
