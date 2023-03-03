@@ -19,6 +19,14 @@ class Tool {
         int profit;
 };
 
+class Store {
+    public:
+        Store(std::vector<Tool> t) : 
+            shelf(t)
+            {}
+
+        std::vector<Tool> shelf;
+};
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Landscaper class defines the player and many of it's member functions form the game itself
@@ -137,7 +145,8 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Store of tools for player to buy from
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    std::vector<Tool> store = {scissors, lawnMower, ridingLawnMower};
+    Store store({scissors, lawnMower, ridingLawnMower});
+    // std::vector<Tool> store = {scissors, lawnMower, ridingLawnMower};
     
     
     // ~~~~~~~~~~~~~~~~~~~~~~
@@ -170,7 +179,7 @@ int main() {
         if(dailyChoice == "1") {
             player.GoToWork();
         } else if(dailyChoice == "2") {
-            player.GoToStore(store);
+            player.GoToStore(store.shelf);
         } else if(dailyChoice == "q" || dailyChoice == "Q") {
             player.ExitGame();
         } else {
