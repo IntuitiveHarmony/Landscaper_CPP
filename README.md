@@ -5,7 +5,9 @@ I will build this simple game to help solidify my understanding of some of the f
 <hr />
 <br />
 
-Play this game in the console at [Replit](https://replit.com/@IntuitiveHarmon/LandscaperCPP?v=1 "Landscaper_CPP") 
+Play this game in the console at [Replit](https://replit.com/@IntuitiveHarmon/LandscaperCPP?v=1 "Landscaper_CPP Replit") 
+
+Check out the code at [gitHub](https://github.com/IntuitiveHarmony/Landscaper_CPP "Landscaper_CPP gitHub") 
 
 <br />
 
