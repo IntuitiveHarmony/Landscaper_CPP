@@ -46,4 +46,8 @@ I had such a struggle getting a particular index to erase from the `shelf` vecto
 
 <br />
 
+## Looking Forward
+
+I would like to revisit this particular game soon and see if I can work out the potential `out of range` bug and also write in a condition that checks to see if the tool shelf in the store is empty before printing out the store.  If it is empty it will give the user a message indicating as much.
+
 ## I hope you enjoy playing this version of C++ Landcaper!

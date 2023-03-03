@@ -177,7 +177,7 @@ int main() {
         std::string dailyChoice;
         std::cout << "\nGood morning " << player.name << "! You have $" << player.funds << std::endl;
         std::cout << "You are using your " << player.currentTool.name << " for a profit of $" << player.currentTool.profit << std::endl;
-        std::cout << "\nWhat would you like to do?\nPlease type a number and press enter:\n\t1. Go to work\n\t2. Go to the store\n\tQ. EXIT GAME\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        std::cout << "\nWhat would you like to do?\nPlease type a number and press enter:\n\t1. Go to work\n\t2. Go to the store\n\tQ. QUIT GAME\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Daily choice input from user
