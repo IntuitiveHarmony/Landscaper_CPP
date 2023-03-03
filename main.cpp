@@ -63,7 +63,7 @@ class Landscaper {
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void ChangeName() {
             std::cout << "Welcome to Landscaper!\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-            std::cout << "\tGo to work in order to gain funds. \n\tUpgrade tools to maximize profit.\n\tThe game is won when the player acquires the higest upgrade to their tool box and $500 funds\n\n";
+            std::cout << "\tIn order to obtain funds, go to work. \n\tMaximize profit by upgrading your tools from the store.\n\n\tYou win the game once: \n\t\tYou have $500 in funds and\n\t\tHave acquired the highest tool upgrade.\n\n";
             std::cout << "What is your name? ";
             std::cin >> name;
             std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
