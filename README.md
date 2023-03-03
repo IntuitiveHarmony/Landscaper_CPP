@@ -23,7 +23,7 @@ Throughout this project, I consistently encountered the challenge of realizing t
 
 ## Dynamic Choice
 
-One sucess I had in this project was making it so the user could still use the numbers to choose tools to purchase even as previous purchases weer being deleted from the vector.  This will cause an `out of range` error however if the user selects `3` if a tool has already been purchased
+One sucess I had in this project was making it so the user could still use the numbers to choose tools to purchase even as previous purchases were being deleted from the vector.  This will cause an `out of range` error however if the user selects `3` if a tool has already been purchased
 
 ``` c++
 if(choice == "1" || choice == "2" || choice == "3") {
