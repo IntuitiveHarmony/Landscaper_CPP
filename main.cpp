@@ -16,10 +16,22 @@ class Tool {
             cost(c),
             profit(p)
             {}
-        // private:
-        std::string name;
-        int cost;
-        int profit;
+        // ~~~~~~~~
+        // Getters
+        // ~~~~~~~~
+        std::string GetName() {
+            return name;
+        }
+        int GetCost() {
+            return cost;
+        }
+        int GetProfit() {
+            return profit;
+        }
+        private:
+            std::string name;
+            int cost;
+            int profit;
 };
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,7 +85,7 @@ class Landscaper {
         // Increase player funds according to the profit of their current tool in use
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void GoToWork() {
-            funds += currentTool.profit;
+            funds += currentTool.GetProfit();
         }
 
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -82,9 +94,9 @@ class Landscaper {
         // If not it wil give them a message with the difference so they know how much to save.
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void BuyTool(Tool newTool) {
-            if(funds >= newTool.cost) {
+            if(funds >= newTool.GetCost()) {
                 toolBox.push_back(newTool);
-                funds -= newTool.cost;
+                funds -= newTool.GetCost();
                 currentTool = newTool;
             } 
         }
@@ -95,7 +107,7 @@ class Landscaper {
         void GoToStore(Store* store) {
             std::cout << "\nWelcome to the store!\n\nWhat would you like to purchase?\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << std::endl;
             for(int i = 0; i < store->shelf.size(); i++) {
-                std::cout << i + 1 << ". " << store->shelf[i].name << " -- Cost: $" << store->shelf[i].cost << " Profit: $" << store->shelf[i].profit << std::endl;
+                std::cout << i + 1 << ". " << store->shelf[i].GetName() << " -- Cost: $" << store->shelf[i].GetCost() << " Profit: $" << store->shelf[i].GetProfit() << std::endl;
             }
             std::cout << "E. EXIT STORE\n\n";
             std::cout << "Please make a selection.\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << std::endl;
@@ -107,11 +119,11 @@ class Landscaper {
             std::cin >> choice;
             if(choice == "1" || choice == "2" || choice == "3") {
                 Tool newTool = store->shelf.at(stoi(choice) - 1);
-                if(funds >= store->shelf.at(stoi(choice) - 1).cost) {
+                if(funds >= store->shelf.at(stoi(choice) - 1).GetCost()) {
                     BuyTool(store->shelf.at(stoi(choice) - 1));
                     store->SellTool((stoi(choice) - 1));
                 } else {
-                    std::cout << "\nYou are short $" << newTool.cost - funds << " for the " << newTool.name << std::endl;
+                    std::cout << "\nYou are short $" << newTool.GetCost() - funds << " for the " << newTool.GetName() << std::endl;
                 }
             } else if (choice == "e" || choice == "E") { 
                 // Exit store 
@@ -125,7 +137,7 @@ class Landscaper {
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void ExitGame() {
             std::cout << "\nThank you for playing Landscaper, " << name << "!\n";
-            std::cout<< "Here are your final stats:\n\tFunds: $" << funds << "\n\tTool in use: " << currentTool.name << std::endl;  
+            std::cout<< "Here are your final stats:\n\tFunds: $" << funds << "\n\tTool in use: " << currentTool.GetName() << std::endl;  
             exit = true;
         }
     
@@ -170,13 +182,13 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set conditions to win game
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    while((player.funds <= 500 || player.currentTool.name != "Riding Lawn Mower") && !player.exit) {
+    while((player.funds <= 500 || player.currentTool.GetName() != "Riding Lawn Mower") && !player.exit) {
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Daily Choice Allow player to choose to go to work, shop for tools or quit game.
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         std::string dailyChoice;
         std::cout << "\nGood morning " << player.name << "! You have $" << player.funds << std::endl;
-        std::cout << "You are using your " << player.currentTool.name << " for a profit of $" << player.currentTool.profit << std::endl;
+        std::cout << "You are using your " << player.currentTool.GetName() << " for a profit of $" << player.currentTool.GetProfit() << std::endl;
         std::cout << "\nWhat would you like to do?\nPlease type a number and press enter:\n\t1. Go to work\n\t2. Go to the store\n\tQ. QUIT GAME\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
