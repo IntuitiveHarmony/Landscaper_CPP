@@ -28,10 +28,10 @@ class Tool {
         int GetProfit() {
             return profit;
         }
-        private:
-            std::string name;
-            int cost;
-            int profit;
+    private:
+        std::string name;
+        int cost;
+        int profit;
 };
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
