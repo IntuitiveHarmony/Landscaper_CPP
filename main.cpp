@@ -16,9 +16,9 @@ class Tool {
             cost(c),
             profit(p)
             {}
-        // ~~~~~~~~
-        // Getters
-        // ~~~~~~~~
+        // ~~~~~~~~~~~~~
+        // Tool Getters
+        // ~~~~~~~~~~~~~
         std::string GetName() {
             return name;
         }
@@ -119,11 +119,11 @@ class Landscaper {
             std::cin >> choice;
             if(choice == "1" || choice == "2" || choice == "3") {
                 Tool newTool = store->shelf.at(stoi(choice) - 1);
-                if(funds >= store->shelf.at(stoi(choice) - 1).GetCost()) {
+                if(GetFunds() >= store->shelf.at(stoi(choice) - 1).GetCost()) {
                     BuyTool(store->shelf.at(stoi(choice) - 1));
                     store->SellTool((stoi(choice) - 1));
                 } else {
-                    std::cout << "\nYou are short $" << newTool.GetCost() - funds << " for the " << newTool.GetName() << std::endl;
+                    std::cout << "\nYou are short $" << newTool.GetCost() - GetFunds() << " for the " << newTool.GetName() << std::endl;
                 }
             } else if (choice == "e" || choice == "E") { 
                 // Exit store 
@@ -140,11 +140,28 @@ class Landscaper {
             std::cout<< "Here are your final stats:\n\tFunds: $" << funds << "\n\tTool in use: " << currentTool.GetName() << std::endl;  
             exit = true;
         }
-    
+        // ~~~~~~~~~~~~~~~~~~~
+        // Landscaper Getters
+        // ~~~~~~~~~~~~~~~~~~~
+        std::string GetName() {
+            return name;
+        }
+        int GetFunds() {
+            return funds;
+        }
+        std::vector<Tool> GetToolBox() {
+            return toolBox;
+        }
+        Tool GetCurrentTool() {
+            return currentTool;
+        }
+        bool GetExit() {
+            return exit;
+        }
     // ~~~~~~~~~~~~~~~~~
     // Player Attributes
     // ~~~~~~~~~~~~~~~~~
-    // private:
+    private:
         std::string name;
         int funds;
         std::vector<Tool> toolBox;
@@ -182,13 +199,13 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set conditions to win game
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    while((player.funds <= 500 || player.currentTool.GetName() != "Riding Lawn Mower") && !player.exit) {
+    while((player.GetFunds() <= 500 || player.GetCurrentTool().GetName() != "Riding Lawn Mower") && !player.GetExit()) {
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Daily Choice Allow player to choose to go to work, shop for tools or quit game.
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         std::string dailyChoice;
-        std::cout << "\nGood morning " << player.name << "! You have $" << player.funds << std::endl;
-        std::cout << "You are using your " << player.currentTool.GetName() << " for a profit of $" << player.currentTool.GetProfit() << std::endl;
+        std::cout << "\nGood morning " << player.GetName() << "! You have $" << player.GetFunds() << std::endl;
+        std::cout << "You are using your " << player.GetCurrentTool().GetName() << " for a profit of $" << player.GetCurrentTool().GetProfit() << std::endl;
         std::cout << "\nWhat would you like to do?\nPlease type a number and press enter:\n\t1. Go to work\n\t2. Go to the store\n\tQ. QUIT GAME\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -210,7 +227,7 @@ int main() {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~
     // Winning message upon exit
     // ~~~~~~~~~~~~~~~~~~~~~~~~~
-    if(player.funds >= 500) {
+    if(player.GetFunds() >= 500) {
         std::cout << "\nCongragulations, you have won!" << std::endl;
     }
     
